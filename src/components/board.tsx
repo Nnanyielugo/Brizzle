@@ -1,21 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useTheme } from 'src/context';
+import { BOARD_HEIGHT, BOARD_WIDTH } from 'src/utils/constants';
 
-const MyComponent = () => {
+const Board = () => {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text>MyComponent</Text>
-    </View>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: colors.background, borderColor: colors.border },
+      ]}></View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
+    width: BOARD_WIDTH + 1,
+    height: BOARD_HEIGHT,
+    alignSelf: 'center',
+    borderWidth: StyleSheet.hairlineWidth,
   },
 });
 
-export default MyComponent;
+export default Board;

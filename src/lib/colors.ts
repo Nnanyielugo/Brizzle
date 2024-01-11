@@ -1,4 +1,4 @@
-interface Color {
+export interface Color {
   background: string;
   border: string;
   button: {
