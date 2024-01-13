@@ -2,8 +2,13 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from 'src/context';
 import { BOARD_HEIGHT, BOARD_WIDTH } from 'src/utils/constants';
+import { RowObj } from 'src/utils/interfaces';
+import Row from './row';
 
-const Board = () => {
+type BoardProps = {
+  board: RowObj[];
+};
+const Board = ({ board }: BoardProps) => {
   const { colors } = useTheme();
 
   return (
@@ -11,7 +16,16 @@ const Board = () => {
       style={[
         styles.container,
         { backgroundColor: colors.background, borderColor: colors.border },
-      ]}></View>
+      ]}>
+      {board.map((row, rowIndex) => (
+        <Row
+          row={row}
+          key={`row.id-${rowIndex}`}
+          rowIndex={rowIndex}
+          // updateBrickPos={updateBrickPos}
+        />
+      ))}
+    </View>
   );
 };
 
@@ -22,6 +36,7 @@ const styles = StyleSheet.create({
     height: BOARD_HEIGHT,
     alignSelf: 'center',
     borderWidth: StyleSheet.hairlineWidth,
+    justifyContent: 'flex-end',
   },
 });
 

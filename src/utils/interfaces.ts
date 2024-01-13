@@ -18,7 +18,7 @@ export type BrickObj = {
   id: string;
   width: number;
   transparent: boolean;
-  pos: BrickPos;
+  pos?: BrickPos;
 };
 
 export type RowObj = {

@@ -1,20 +1,51 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
+import { BrickObj, RowObj } from 'src/utils/interfaces';
+import Brick from 'assets/brick.jpeg';
+import { useTheme } from 'src/context';
 
-const Item = () => {
+type ItemProps = {
+  item: BrickObj;
+  rowIndex: number;
+  itemIndex: number;
+  row: RowObj;
+  // updateBrickPos: (
+  //   brick: BrickObj,
+  //   left: number,
+  //   rowIndex: number,
+  //   brickIndex: number,
+  // ) => void;
+};
+const Item = ({ item, row, rowIndex, itemIndex }: ItemProps) => {
+  const { colors } = useTheme();
+  const left = React.useRef(
+    new Animated.Value(item.pos?.left as number),
+  ).current;
+  const rowBottom = 50 * rowIndex + 1;
+  const itemLeft = row.row[itemIndex - 1];
+  const itemRight = row.row[itemIndex + 1];
   return (
-    <View style={styles.container}>
-      <Text>Item</Text>
-    </View>
+    <Animated.Image
+      source={Brick}
+      style={[
+        styles.image,
+        {
+          width: item.width,
+          left: left,
+          bottom: rowBottom,
+          borderColor: colors.brickBorder,
+        },
+      ]}
+      // {...panResponder.panHandlers}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#2c3e50',
+  image: {
+    height: 50,
+    borderWidth: StyleSheet.hairlineWidth,
+    position: 'absolute',
   },
 });
 

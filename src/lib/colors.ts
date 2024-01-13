@@ -6,6 +6,7 @@ export interface Color {
     text: string;
   };
   text: string;
+  brickBorder: string;
 }
 
 const light: Color = {
@@ -16,6 +17,7 @@ const light: Color = {
     text: 'white',
   },
   text: '#2c3e50',
+  brickBorder: 'whitesmoke',
 };
 
 const dark: Color = {
@@ -26,6 +28,7 @@ const dark: Color = {
     text: 'whites',
   },
   text: 'whitesmoke',
+  brickBorder: '#2c3e50',
 };
 
 export default {
